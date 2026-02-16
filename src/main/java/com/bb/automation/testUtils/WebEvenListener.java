@@ -27,6 +27,7 @@ public class WebEvenListener extends TestBase implements ITestListener{
 		try {
 			String path = Utilities.takeScreenShotWhenFailed();
 			test.get().addScreenCaptureFromPath(path);
+			System.out.println("Hello");
 			 
 			
 		}catch(IOException e) {
