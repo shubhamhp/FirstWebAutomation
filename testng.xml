@@ -1,0 +1,18 @@
+
+
+<suite name="Web Automation" parallel="tests" thread-count="2">
+<listeners>
+        <listener class-name="com.bb.automation.testUtils.WebEvenListener"/>
+ </listeners>
+<test name="Smoke Tests">
+<classes >
+<class name="com.bb.automation.tests.LoginPageTest"></class>
+</classes>
+</test>
+
+<test name="Test 2">
+<classes>
+<class name="com.bb.automation.tests.LoginPageTest"></class>
+</classes>
+</test>
+</suite>
