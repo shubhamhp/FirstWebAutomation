@@ -7,6 +7,7 @@ import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class TestBase {
@@ -91,10 +92,29 @@ public class TestBase {
 	
 	/*In this we use getters and setters return tdriver.get() and tdriver.set(new ChromeDriver())*/
 	public static void threadInitialization() {
+		
 		String browserName = props.getProperty("browser");
 		//We check if the driver is null before entering the synchronized block. 
 //		This ensures that once the driver is initialized, other tests don't have to wait for a 'lock,' keeping the framework fast.
 		//It means after first initialization it doesnt initialize again it fetches already sitting driver.
+
+//		--remote-allow-origins=*: This is the #1 reason Selenium fails with "SessionNotCreatedException" on newer Chrome versions.
+
+//		--window-size: Fixes "ElementNotInteractable" errors where elements are hidden in headless mode.
+
+//				System.getProperty("headless"): 
+//		Allows Jenkins to control the browser visibility without changing your code.
+		ChromeOptions options = new ChromeOptions();
+	    options.addArguments("--remote-allow-origins=*"); // Crucial for connection stability
+	    options.addArguments("--window-size=1920,1080");  // Ensures all elements are visible
+	    options.addArguments("--disable-search-engine-choice-screen"); // Removes the new Chrome popup
+
+	    // 2. Headless Logic (Reads from Jenkins or defaults to false)
+	    // If you run "mvn clean test -Dheadless=true", this activates.
+	    
+	    if (System.getProperty("headless", "false").equalsIgnoreCase("true")) {
+	        options.addArguments("--headless=new");
+	    }
 		if(browserName.equals("Chrome")) {
 			tdriver.set(new ChromeDriver());
 		}
