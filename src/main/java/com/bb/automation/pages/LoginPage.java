@@ -28,7 +28,7 @@ public class LoginPage extends TestBase {
 		username.sendKeys(props.getProperty("username"));
 		password.sendKeys(props.getProperty("password"));
 		loginBtn.click();
-		Assert.assertEquals("1", "4");
+//		Assert.assertEquals("1", "4");
 	}
 	
 }
