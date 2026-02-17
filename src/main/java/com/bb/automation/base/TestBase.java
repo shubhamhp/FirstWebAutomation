@@ -22,7 +22,7 @@ public class TestBase {
 		try {
 			props = new Properties();
 			ClassLoader loader = Thread.currentThread().getContextClassLoader();
-			InputStream ip = loader.getResourceAsStream("com/bb/automation/config/config.properties");
+			InputStream ip = loader.getResourceAsStream("config.properties");
 			if(ip!=null) {
 			props.load(ip);
 			}else {
